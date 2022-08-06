@@ -1,0 +1,40 @@
+create table sandbox_ds.gsc.phones (
+name varchar(20) not null unique,
+phone_number integer not null unique
+)
+
+create table sandbox_ds.gsc.calls(
+id integer not null,
+caller integer not null,
+calle integer not null,
+duration integer not null,
+unique(id)
+);
+select * from sandbox_ds.gsc.phones
+insert into sandbox_ds.gsc.phones(name,phone_number)values('pavan','8978235629')
+insert into sandbox_ds.gsc.phones(name,phone_number)values('bri','8442772823')
+insert into sandbox_ds.gsc.phones(name,phone_number)values('sai','9848181365')
+insert into sandbox_ds.gsc.phones(name,phone_number)values('richie','9959663113')
+insert into sandbox_ds.gsc.phones(name,phone_number)values('tatoo','8978235631')
+insert into sandbox_ds.gsc.phones(name,phone_number)values('amma','8125336216')
+select * from sandbox_ds.gsc.calls
+insert into sandbox_ds.gsc.calls(id,caller,calle,duration)values('1','8125336216','8978235629','12')
+insert into sandbox_ds.gsc.calls(id,caller,calle,duration)values('2','8978235631','8978235629','15')
+insert into sandbox_ds.gsc.calls(id,caller,calle,duration)values('3','8442772823','9959663113','25')
+insert into sandbox_ds.gsc.calls(id,caller,calle,duration)values('4','8978235631','8978235629','5')
+insert into sandbox_ds.gsc.calls(id,caller,calle,duration)values('5','9959663113','8978235629','20')
+insert into sandbox_ds.gsc.calls(id,caller,calle,duration)values('6','8978235629','8442772823','50')
+insert into sandbox_ds.gsc.calls(id,caller,calle,duration)values('7','8978235629','8442772823','50')
+
+
+select p.name,sum(c.duration)
+from
+sandbox_ds.gsc.phones p inner join
+sandbox_ds.gsc.calls c on (p.phone_number=c.caller)
+group by p.name
+having sum(c.duration)>=10
+order by p.name
+
+
+
+
